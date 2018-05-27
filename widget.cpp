@@ -78,7 +78,7 @@ void Widget::on_LengthBtn_clicked()
         string data = info.toStdString();
         frame.SetData(data);
         frame.CheckSum();
-        QString info2 = QString::number(frame.getLength(),10);
+        QString info2 = QString::fromStdString(frame.getLength());
         ui->LengthLineEdit->setText(info2);
     }
 }
@@ -110,7 +110,7 @@ void Widget::on_CheckBtn_clicked()
         string data = info.toStdString();
         frame.SetData(data);
         frame.CheckSum();
-        QString info = QString::number(frame.getCheckNum(),10);
+        QString info = QString::fromStdString(frame.getCheckNum());
         ui->CheckLineEdit->setText(info);
     }
 }

@@ -2,6 +2,7 @@
 #define FRAMEENCAP_H
 #include<iostream>
 #include<string>
+#include<string.h>
 using namespace std;
 
 /*
@@ -20,9 +21,9 @@ typedef struct FRAME_STRUCT
     unsigned char Delimiter;    // 帧前定界符
     unsigned char Destination[6];   // 目的地址
     unsigned char Source[6];    //  源地址
-    unsigned short Length;  // 长度字段
+    unsigned char length[2];  // 长度字段
     string Data;           // 数据字段(长度可变)
-    unsigned int Checksum;  // 校验字段
+    unsigned char Checksum[4];  // 校验字段
 }frame_struct;
 
 class FrameEncap{
@@ -32,16 +33,20 @@ private:
     frame_struct Frame;
 public:
     FrameEncap();
+    FrameEncap(string data);
+    void init();
     void SetData(string data);
     unsigned char CheckSum();
     string ShowAll();
     string enCode(unsigned char data);
+    string enCode2(string str);
     string getPreamble();
     string getDelimiter();
     string getDestination();
     string getSource();
-    int getLength();
+    string getLength();
     string getData();
-    unsigned int getCheckNum();
+    string getCheckNum();
+    unsigned int GetCrc32(string InStr,unsigned int len);
 };
 #endif // FRAMEENCAP_H
